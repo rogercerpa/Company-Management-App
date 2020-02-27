@@ -1,0 +1,23 @@
+{
+  "name": "company-management-app",
+  "version": "1.0.0",
+  "description": "This Command line application will help you as a business owner manage the different departments, roles and all your employees database.",
+  "main": "management-app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rogercerpa/Company-Management-App.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rogercerpa/Company-Management-App/issues"
+  },
+  "homepage": "https://github.com/rogercerpa/Company-Management-App#readme",
+  "dependencies": {
+    "inquirer": "^7.0.4",
+    "mysql": "^2.18.1"
+  }
+}
