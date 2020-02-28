@@ -11,8 +11,51 @@ const connection = mysql.createConnection({
 
 connection.connect(function(err) {
 	if (err) throw err;
-	management();
+	startApp();
 });
+
+function startApp() {
+	inquirer
+		.prompt({
+			name    : 'start',
+			type    : 'rawlist',
+			message : 'What would you like to do?',
+			choices : [
+				'View all Employees',
+				'View all Employees by department',
+				'View all Employees by Manager',
+				'Add Employee',
+				'Remove Employee',
+				'Update Employee Role',
+				'Update Employee Manager'
+			]
+		})
+		.then((answer) => {
+			switch (answer.start) {
+				case 'View all Employees':
+					employeesList();
+					break;
+				case 'View all Employees by department':
+					employeeDepart();
+					break;
+				case 'View all Employees by Manager':
+					employeeManager();
+					break;
+				case 'Add Employee':
+					addEmployee();
+					break;
+				case 'Remove Employee':
+					removeEmp();
+					break;
+				case 'Update Employee Role':
+					updateRole();
+					break;
+				case 'Update Employee Manager':
+					updateMananger();
+					break;
+			}
+		});
+}
 
 function management() {
 	inquirer
@@ -20,14 +63,14 @@ function management() {
 			name    : 'addFeature',
 			type    : 'list',
 			message : 'Select the type of feature you would like to add:',
-			choices : [ 'Department', 'Roles', 'Employee' ]
+			choices : [ 'Add Department', 'Add Roles', 'Add Employee' ]
 		})
 		.then(function(answer) {
-			if (answer.addFeature === 'Department') {
+			if (answer.addFeature === 'Add Department') {
 				addDepartment();
-			} else if (answer.addFeature === 'Roles') {
+			} else if (answer.addFeature === 'Add Roles') {
 				addRoles();
-			} else if (answer.addFeature === 'Employee') {
+			} else if (answer.addFeature === 'Add Employee') {
 				addEmployee();
 			}
 		});
@@ -40,7 +83,7 @@ function addDepartment() {
 			{
 				name    : 'departmentName',
 				type    : 'input',
-				message : 'How would you like to name the new department?'
+				message : 'What the name of the new department?'
 			}
 		])
 		.then(function(answer) {
@@ -62,6 +105,7 @@ function addDepartment() {
 
 // this function will add a new role to the database
 function addRoles() {
+	const query = 'SELECT * FROM departments';
 	inquirer
 		.prompt([
 			{
@@ -76,8 +120,12 @@ function addRoles() {
 			},
 			{
 				name    : 'departmentId',
-				type    : 'input',
-				message : 'Whats the department ID#?'
+				type    : 'list',
+				message : 'Select the department',
+				choices : connection.query(query, (err, res) => {
+					if (err) throw err;
+					res.forEach((dataRow, i) => {});
+				})
 			}
 		])
 		.then(function(answer) {
@@ -91,10 +139,31 @@ function addRoles() {
 				function(err) {
 					if (err) throw err;
 					console.log(
-						`You have created a new role title ${this.title} successfully`
+						`You have created a new role title ${answer.title} successfully`
 					);
 					management();
 				}
 			);
 		});
+}
+
+function addEmployee() {
+	inquirer.prompt([
+		{
+			name    : 'firstName',
+			type    : 'input',
+			message : 'Whats the employee first name?'
+		},
+		{
+			name    : 'lastName',
+			type    : 'input',
+			message : 'Whats the employee last name?'
+		},
+		{
+			name    : 'role',
+			type    : 'list',
+			message : 'Whats the employee role?',
+			choices : []
+		}
+	]);
 }
