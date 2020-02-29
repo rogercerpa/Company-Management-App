@@ -56,13 +56,60 @@ function startApp() {
 			}
 		});
 }
+
+// view the list of all the employees
 function employeesList() {
-	const query = 'SELECT * FROM employee';
-	connection.query(query, (err, res) => {
-		res.forEach((dataRow) => console.log(dataRow.employee));
+	const queryString = 'SELECT * FROM employee;';
+	const query = connection.query(queryString, (err, res) => {
+		if (err) throw err;
+		res.forEach((dataRow) =>
+			console.log(
+				`Employee id: ${dataRow.id} || first name: ${dataRow.first_name} || last name: ${dataRow.last_name}`
+			)
+		);
 		console.log('\nStart Over');
 		startApp();
 	});
+}
+
+// view the list of all the employees and departments
+function employeeDepart() {
+	inquirer
+		.prompt({
+			name    : 'selectDepart',
+			type    : 'list',
+			message : 'Select the type of feature you would like to add:',
+			choices : [ 'Sales', 'Engineering', 'Finance' ]
+		})
+		.then(function(answer) {
+			switch (answer.selectDepart) {
+				case 'Sales':
+					salesEmp();
+					break;
+				case 'Engineering':
+					engineeringEmp();
+					break;
+				case 'Finance':
+					financeEmp();
+					break;
+			}
+		});
+
+	function salesEmp() {
+		const queryString = 'SELECT * FROM role WHERE department_id = 1;';
+		const query = connection.query(queryString, (err, res) => {
+			if (err) throw err;
+			res.forEach((dataRow) =>
+				console.log(
+					`Employee id: ${dataRow.id} || first name: ${dataRow.first_name} || last name: ${dataRow.last_name}`
+				)
+			);
+			console.log('\nStart Over');
+			startApp();
+		});
+	}
+	function engineeringEmp() {}
+	function financeEmp() {}
 }
 
 function management() {
