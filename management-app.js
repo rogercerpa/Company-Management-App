@@ -24,7 +24,9 @@ function startApp() {
 				'View all Employees',
 				'View all Employees by department',
 				'View all Employees by Manager',
-				'Add Employee',
+				'Add New Employee',
+				'Add New Department',
+				'Add New Role',
 				'Remove Employee',
 				'Update Employee Role',
 				'Update Employee Manager'
@@ -41,8 +43,14 @@ function startApp() {
 				case 'View all Employees by Manager':
 					employeeManager();
 					break;
-				case 'Add Employee':
+				case 'Add New Employee':
 					addEmployee();
+					break;
+				case 'Add New Department':
+					addDepartment();
+					break;
+				case 'Add New Role':
+					addRoles();
 					break;
 				case 'Remove Employee':
 					removeEmp();
@@ -56,7 +64,6 @@ function startApp() {
 			}
 		});
 }
-
 // view the list of all the employees
 function employeesList() {
 	const queryString = 'SELECT * FROM employee;';
@@ -112,25 +119,6 @@ function employeeDepart() {
 	function financeEmp() {}
 }
 
-function management() {
-	inquirer
-		.prompt({
-			name    : 'addFeature',
-			type    : 'list',
-			message : 'Select the type of feature you would like to add:',
-			choices : [ 'Add Department', 'Add Roles', 'Add Employee' ]
-		})
-		.then(function(answer) {
-			if (answer.addFeature === 'Add Department') {
-				addDepartment();
-			} else if (answer.addFeature === 'Add Roles') {
-				addRoles();
-			} else if (answer.addFeature === 'Add Employee') {
-				addEmployee();
-			}
-		});
-}
-
 // this function will add a new department to the database
 function addDepartment() {
 	inquirer
@@ -152,13 +140,14 @@ function addDepartment() {
 					console.log(
 						`You have created a new department named ${answer.departmentName} successfully`
 					);
-					management();
+					console.log('\nStart Over');
+					startApp();
 				}
 			);
 		});
 }
 
-// this function will add a new role to the database
+// this function will add a new role to the company database
 function addRoles() {
 	const query = 'SELECT * FROM departments';
 	inquirer
@@ -202,6 +191,7 @@ function addRoles() {
 		});
 }
 
+// this function will add a new employee to the company database
 function addEmployee() {
 	inquirer.prompt([
 		{
@@ -218,6 +208,18 @@ function addEmployee() {
 			name    : 'role',
 			type    : 'list',
 			message : 'Whats the employee role?',
+			choices : []
+		}
+	]);
+}
+
+// this function will delete an employee from the company database
+function removeEmp() {
+	inquirer.prompt([
+		{
+			name    : 'removeEmp',
+			type    : 'list',
+			message : 'Which Employee you would like to remove?',
 			choices : []
 		}
 	]);
