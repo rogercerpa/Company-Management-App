@@ -29,7 +29,8 @@ function startApp() {
 				'Add New Role',
 				'Remove Employee',
 				'Update Employee Role',
-				'Update Employee Manager'
+				'Update Employee Manager',
+				'Quit'
 			]
 		})
 		.then((answer) => {
@@ -60,6 +61,9 @@ function startApp() {
 					break;
 				case 'Update Employee Manager':
 					updateMananger();
+					break;
+				case 'Quit':
+					connection.end();
 					break;
 			}
 		});
@@ -103,7 +107,7 @@ function employeeDepart() {
 		});
 
 	function salesEmp() {
-		const queryString = 'SELECT * FROM role WHERE department_id = 1;';
+		const queryString = 'SELECT * FROM employee WHERE role_id = 1;';
 		const query = connection.query(queryString, (err, res) => {
 			if (err) throw err;
 			res.forEach((dataRow) =>
@@ -166,10 +170,7 @@ function addRoles() {
 				name    : 'departmentId',
 				type    : 'list',
 				message : 'Select the department',
-				choices : connection.query(query, (err, res) => {
-					if (err) throw err;
-					res.forEach((dataRow, i) => {});
-				})
+				choices : [ 'Sales', 'Engineering', 'Finance' ]
 			}
 		])
 		.then(function(answer) {

@@ -8,14 +8,12 @@ VALUES
     ('Finance');
 
 INSERT INTO role
-    (title, salary, department_id)
+    (title, salary)
 VALUES
-    ('Sales Manager', 50000, 1),
-    ('Account Manager', 60000, 1),
-    ('Application Engineer', 70000, 3),
-    ('Application Engineer Manager', 80000, 1),
-    ('Lead Application Engineer', 75000, 2),
-    ('Account assistance', 40000, 2);
+    ('Sales Manager', 50000),
+    ('Application Engineer', 60000),
+    ('Finance Manager', 70000)
+,
 
 INSERT INTO employee
     (first_name, last_name, role_id)
