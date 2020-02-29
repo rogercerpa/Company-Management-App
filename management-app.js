@@ -56,6 +56,14 @@ function startApp() {
 			}
 		});
 }
+function employeesList() {
+	const query = 'SELECT * FROM employee';
+	connection.query(query, (err, res) => {
+		res.forEach((dataRow) => console.log(dataRow.employee));
+		console.log('\nStart Over');
+		startApp();
+	});
+}
 
 function management() {
 	inquirer
