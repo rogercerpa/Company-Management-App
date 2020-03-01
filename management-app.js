@@ -209,7 +209,7 @@ function addEmployee() {
 			name    : 'role',
 			type    : 'list',
 			message : 'Whats the employee role?',
-			choices : []
+			choices : [ 'Sales Manager', 'Account Manager', 'Application Engineer' ]
 		}
 	]);
 }
