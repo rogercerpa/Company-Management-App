@@ -89,7 +89,8 @@ function employeeDepart() {
 		.prompt({
 			name    : 'selectDepart',
 			type    : 'list',
-			message : 'Select the type of feature you would like to add:',
+			message :
+				'Select the department you would like to see the list of employee:',
 			choices : [ 'Sales', 'Engineering', 'Finance' ]
 		})
 		.then(function(answer) {
@@ -119,8 +120,32 @@ function employeeDepart() {
 			startApp();
 		});
 	}
-	function engineeringEmp() {}
-	function financeEmp() {}
+	function engineeringEmp() {
+		const queryString = 'SELECT * FROM employee WHERE role_id = 2;';
+		const query = connection.query(queryString, (err, res) => {
+			if (err) throw err;
+			res.forEach((dataRow) =>
+				console.log(
+					`Employee id: ${dataRow.id} || first name: ${dataRow.first_name} || last name: ${dataRow.last_name}`
+				)
+			);
+			console.log('\nStart Over');
+			startApp();
+		});
+	}
+	function financeEmp() {
+		const queryString = 'SELECT * FROM employee WHERE role_id = 3;';
+		const query = connection.query(queryString, (err, res) => {
+			if (err) throw err;
+			res.forEach((dataRow) =>
+				console.log(
+					`Employee id: ${dataRow.id} || first name: ${dataRow.first_name} || last name: ${dataRow.last_name}`
+				)
+			);
+			console.log('\nStart Over');
+			startApp();
+		});
+	}
 }
 
 // this function will add a new department to the database
