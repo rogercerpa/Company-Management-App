@@ -258,34 +258,45 @@ function addEmployee() {
 
 // this function will delete an employee from the company database
 function removeEmp() {
-	inquirer.prompt([
-		{
-			name    : 'removeEmp',
-			type    : 'list',
-			message : 'Which Employee you would like to remove?',
-			choices : []
-		}
-	]);
+	console.log('This option is under construction, come back later!!');
+	console.log('\nStart Over');
+	startApp();
+
+	// inquirer.prompt([
+	// 	{
+	// 		name    : 'removeEmp',
+	// 		type    : 'list',
+	// 		message : 'Which Employee you would like to remove?',
+	// 		choices : []
+	// 	}
+	// ]);
 }
 
 function updateRole() {
-	inquirer.prompt([
-		{
-			name    : 'updateRole',
-			type    : 'list',
-			message : 'Which Employee you would like to update the role to?',
-			choices : []
-		}
-	]);
+	console.log('This option is under construction, come back later!!');
+	console.log('\nStart Over');
+	startApp();
+
+	// inquirer.prompt([
+	// 	{
+	// 		name    : 'updateRole',
+	// 		type    : 'list',
+	// 		message : 'Which Employee you would like to update the role to?',
+	// 		choices : []
+	// 	}
+	// ]);
 }
 
 function updateMananger() {
-	inquirer.prompt([
-		{
-			name    : 'updateManager',
-			type    : 'list',
-			message : 'Which Employee you would like to update the Manager?',
-			choices : []
-		}
-	]);
+	console.log('This option is under construction, come back later!!');
+	console.log('\nStart Over');
+	startApp();
+	// inquirer.prompt([
+	// 	{
+	// 		name    : 'updateManager',
+	// 		type    : 'list',
+	// 		message : 'Which Employee you would like to update the Manager?',
+	// 		choices : []
+	// 	}
+	// ])
 }
