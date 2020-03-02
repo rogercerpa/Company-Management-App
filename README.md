@@ -14,6 +14,6 @@ This Command line application will help you as a business owner manage the diffe
         -Update employee manager
 -follow the steps once you have selected your option from the list.
 
-<img src="company-management-app.gif" title="app demo"/>
+![](company-management-app.gif)
 
 enjoy
