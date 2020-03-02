@@ -242,3 +242,25 @@ function removeEmp() {
 		}
 	]);
 }
+
+function updateRole() {
+	inquirer.prompt([
+		{
+			name    : 'updateRole',
+			type    : 'list',
+			message : 'Which Employee you would like to update the role to?',
+			choices : []
+		}
+	]);
+}
+
+function updateMananger() {
+	inquirer.prompt([
+		{
+			name    : 'updateManager',
+			type    : 'list',
+			message : 'Which Employee you would like to update the Manager?',
+			choices : []
+		}
+	]);
+}
