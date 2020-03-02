@@ -153,7 +153,6 @@ function addDepartment() {
 
 // this function will add a new role to the company database
 function addRoles() {
-	const query = 'SELECT * FROM departments';
 	inquirer
 		.prompt([
 			{
@@ -169,8 +168,9 @@ function addRoles() {
 			{
 				name    : 'departmentId',
 				type    : 'list',
-				message : 'Select the department',
-				choices : [ 'Sales', 'Engineering', 'Finance' ]
+				message :
+					'Select the department: 1. Sales || 2. Engineering || 3. Finance',
+				choices : [ 1, 2, 3 ]
 			}
 		])
 		.then(function(answer) {
@@ -183,10 +183,9 @@ function addRoles() {
 				},
 				function(err) {
 					if (err) throw err;
-					console.log(
-						`You have created a new role title ${answer.title} successfully`
-					);
-					management();
+					console.log(`You have created a new role successfully`);
+					console.log('\nStart Over');
+					startApp();
 				}
 			);
 		});
@@ -194,24 +193,42 @@ function addRoles() {
 
 // this function will add a new employee to the company database
 function addEmployee() {
-	inquirer.prompt([
-		{
-			name    : 'firstName',
-			type    : 'input',
-			message : 'Whats the employee first name?'
-		},
-		{
-			name    : 'lastName',
-			type    : 'input',
-			message : 'Whats the employee last name?'
-		},
-		{
-			name    : 'role',
-			type    : 'list',
-			message : 'Whats the employee role?',
-			choices : [ 'Sales Manager', 'Account Manager', 'Application Engineer' ]
-		}
-	]);
+	inquirer
+		.prompt([
+			{
+				name    : 'firstName',
+				type    : 'input',
+				message : 'Whats the employee first name?'
+			},
+			{
+				name    : 'lastName',
+				type    : 'input',
+				message : 'Whats the employee last name?'
+			},
+			{
+				name    : 'role',
+				type    : 'list',
+				message :
+					'Whats the employee role id? 1. Sales Manager || 2. Account Manager || 3. Application Engineer ',
+				choices : [ 1, 2, 3 ]
+			}
+		])
+		.then(function(answer) {
+			connection.query(
+				'INSERT INTO employee SET ?',
+				{
+					first_name : answer.firstName,
+					last_name  : answer.lastName,
+					role_id    : answer.role
+				},
+				function(err) {
+					if (err) throw err;
+					console.log(`You have added a new employee successfully`);
+					console.log('\nStart Over');
+					startApp();
+				}
+			);
+		});
 }
 
 // this function will delete an employee from the company database
